@@ -19,13 +19,13 @@ export function calculatePrice(ornaments: string): number | undefined {
   let total = 0;
 
   for (let i = 0; i < ornaments.length; i++) {
-    const current = getValue(ornaments[i]!);
-    const next = i < ornaments.length ? getValue(ornaments[i + 1]!) : undefined;
+    const char = ornaments[i]!;
+    const nextChar = ornaments[i + 1];
+    const current = getValue(char!);
+    const next = nextChar !== undefined ? getValue(nextChar) : nextChar;
 
     if (!current) return undefined;
-    if (!next) {
-      total += current;
-    } else if (current < next) {
+    if (next && current < next) {
       total -= current;
     } else {
       total += current;
